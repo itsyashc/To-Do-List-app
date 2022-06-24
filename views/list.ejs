@@ -1,0 +1,40 @@
+<%- include("header") -%>
+
+<div class="box" id="heading">
+  <h1><%= listTitle %></h1>
+</div>
+
+<div class="box">
+
+  <!-- For getting information about which task is checked. -->
+  <form action="/delete" method="post">
+
+    <% newListItems.forEach(function(item){%>
+
+    <div class="item">
+      <input type="checkbox" name="checkBox" value="<%= item._id %>" onChange="this.form.submit()" />
+      <p><%= item.name %></p>
+    </div>
+
+    <%}); %>
+
+    <!-- To get name of which list's task is checked. -->
+    <input type="hidden" name="checkedListName" value="<%= listTitle %>">
+
+  </form>
+
+  <!-- For adding new task -->
+  <form class="item" action="/" method="post">
+
+    <input
+      type="text"
+      name="newItem"
+      placeholder="New Item"
+      autocomplete="off"
+    />
+    <button type="submit" name="list" value="<%= listTitle %>">+</button>
+
+  </form>
+</div>
+
+<%- include("footer") -%>
